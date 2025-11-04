@@ -1,3 +1,7 @@
+//Entry point
+mod cli;
+mod commands;
+
 fn main() {
-    println!("Hello, world!");
+    cli::run();
 }
