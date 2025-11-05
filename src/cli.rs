@@ -2,7 +2,8 @@
 use std::path::PathBuf;
 use std::io::{self, Write};
 use clap::{Parser, Subcommand};
-use crate::commands;
+use crate::{commands, replstate::ReplState};
+
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -20,6 +21,9 @@ pub enum Commands{
     Cat{
         path: PathBuf,
     },
+    Cd{
+        path: PathBuf,
+    },
     Exit
 }
 
@@ -27,6 +31,8 @@ pub fn run() {
     println!("Starting ProV!");
     //REPL loop
     loop {
+        //let mut state = ReplState::new();
+
         //Printing the os signature thing??? bro what
         //Flushing the output
         print!("prov> ");
@@ -65,6 +71,7 @@ pub fn run() {
         match args.cmd {
             Commands::Ls { path } => commands::ls::run(path),
             Commands::Cat { path } => commands::cat::run(path),
+            Commands::Cd { path } => commands::cat::run(path),
             Commands::Exit => commands::exit::run(),
         }
     }
